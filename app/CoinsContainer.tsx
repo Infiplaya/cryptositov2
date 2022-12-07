@@ -36,9 +36,5 @@ async function getMarketData() {
 
 export const CoinsContainer = async () => {
   const coins = await getMarketData();
-  return (
-    <div>
-      <CoinSearch coins={coins} />
-    </div>
-  );
+  return <CoinSearch coins={coins} />;
 };

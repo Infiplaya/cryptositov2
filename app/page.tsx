@@ -1,8 +1,9 @@
-import { CoinSearch } from "./CoinSearch";
+import { Suspense } from "react";
 import { Container } from "./Container";
 import { z } from "zod";
 import { TrendingCoins } from "./TrendingCoins";
 import { CoinsContainer } from "./CoinsContainer";
+import { LoadingSkeleton } from "./LoadingSkeleton";
 
 const cryptosResult = z.array(
   z.object({
@@ -42,8 +43,12 @@ export default async function Home() {
   const coins = await getMarketData();
   return (
     <Container>
-      <TrendingCoins />
-      <CoinsContainer />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <TrendingCoins />
+      </Suspense>
+      <Suspense fallback={<LoadingSkeleton />}>
+        <CoinsContainer />
+      </Suspense>
     </Container>
   );
 }

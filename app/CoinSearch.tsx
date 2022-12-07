@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { CoinItem } from "./CoinItem";
 import { CryptoData } from "./page";
@@ -44,7 +45,7 @@ export function CoinSearch({ coins }: { coins: CryptoData }) {
               }
             })
             .map((coin) => (
-              <CoinItem key={coin.id} coin={coin} />
+              <CoinItem coin={coin} key={coin.id} />
             ))}
         </tbody>
       </table>

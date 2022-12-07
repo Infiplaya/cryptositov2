@@ -4,11 +4,15 @@ import React from "react";
 export const NavLink = ({
   children,
   href,
-  classNames
+  classNames,
 }: {
   children: React.ReactNode;
   href: string;
   classNames?: string;
 }) => {
-  return <Link href={href} className={classNames}>{children}</Link>;
+  return (
+    <Link href={href} className={classNames}>
+      {children}
+    </Link>
+  );
 };
