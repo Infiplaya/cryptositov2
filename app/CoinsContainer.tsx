@@ -1,9 +1,5 @@
-import { CoinSearch } from "./CoinSearch";
-import { Container } from "./Container";
 import { z } from "zod";
-import { TrendingCoins } from "./TrendingCoins";
-import { CoinsContainer } from "./CoinsContainer";
-
+import { CoinSearch } from "./CoinSearch";
 const cryptosResult = z.array(
   z.object({
     market_cap_rank: z.number(),
@@ -38,12 +34,11 @@ async function getMarketData() {
   return coins;
 }
 
-export default async function Home() {
+export const CoinsContainer = async () => {
   const coins = await getMarketData();
   return (
-    <Container>
-      <TrendingCoins />
-      <CoinsContainer />
-    </Container>
+    <div>
+      <CoinSearch coins={coins} />
+    </div>
   );
-}
+};
