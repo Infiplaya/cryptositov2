@@ -65,58 +65,62 @@ export default async function CoinPage({ params }: any) {
   return (
     <>
       <Container>
-        <div>
+        <div className="mt-10 flex py-8">
           <Image
             src={coinInfo.image.large}
             alt="coin-image"
             width={100}
             height={100}
+            className="rounded-full w-20 mr-8"
           ></Image>
           <div>
-            <p>{coinInfo.name} price</p>
+            <p className="text-3xl font-bold">{coinInfo.name}</p>
             <p>{coinInfo.symbol.toUpperCase()} / USD</p>
             <Link href={coinInfo.links.homepage[0]}>
               {coinInfo.links.homepage[0]}
             </Link>
           </div>
         </div>
-        <div>
+
+        <div className="grid md:grid-cols-2 gap-8">
           <div>
             <div>
               {coinInfo.market_data?.current_price.usd ? (
-                <p>{coinInfo.market_data.current_price.usd.toLocaleString()}</p>
+                <p className="text-3xl font-bold">
+                  Price: $
+                  {coinInfo.market_data.current_price.usd.toLocaleString()}
+                </p>
               ) : null}
-              <p>7 day</p>
             </div>
-            <div>
-              <p>Market Cap</p>
+            <div className="p-3 shadow-md mt-5">
+              <p className="text-xl font-bold">Market Cap</p>
               {coinInfo.market_data?.market_cap ? (
                 <p>${coinInfo.market_data.market_cap.usd.toLocaleString()}</p>
               ) : null}
             </div>
-            <div>
-              <p>Volume 24h</p>
+            <div className="p-3 shadow-md mt-5">
+              <p className="text-xl font-bold">Volume 24h</p>
               {coinInfo.market_data?.total_volume ? (
                 <p>
                   ${coinInfo.market_data.total_volume.usd?.toLocaleString()}
                 </p>
               ) : null}
             </div>
-            <div>
-              <div>
-                <p>24 High</p>
+            <div className="flex gap-5 p-3 shadow-md mt-5">
+              <div className="border-r-2 dark:border-gray-700  p-3">
+                <p className="text-xl font-bold">24 High</p>
                 {coinInfo.market_data?.high_24h ? (
                   <p>{coinInfo.market_data.high_24h.usd?.toLocaleString()}</p>
                 ) : null}
               </div>
-              <div>
-                <p>24 low</p>
+              <div className="border-r-2 dark:border-gray-700 p-3">
+                <p className="text-xl font-bold">24 low</p>
                 {coinInfo.market_data?.low_24h ? (
                   <p>{coinInfo.market_data.low_24h.usd?.toLocaleString()}</p>
                 ) : null}
               </div>
-              <div>
-                <p>Circulating supply</p>
+              <div className="p-3">
+                <p className="text-xl font-bold">Circulating supply</p>
                 {coinInfo.market_data?.circulating_supply ? (
                   <p>{coinInfo.market_data.circulating_supply}</p>
                 ) : null}
@@ -124,21 +128,50 @@ export default async function CoinPage({ params }: any) {
             </div>
           </div>
           <div>
-            <p>Price Change 24h</p>
-            {coinInfo.market_data?.price_change_percentage_24h.toFixed(2)}
-          </div>
-          <div>
-            <p>Price Change 7d</p>
-            {coinInfo.market_data?.price_change_percentage_7d.toFixed(2)}
-          </div>
-          <div>
-            <p>Price Change 14d</p>
-            {coinInfo.market_data?.price_change_percentage_14d.toFixed(2)}
+            <div className="p-3 shadow-md">
+              <p className="text-xl font-bold">Price Change 24h</p>
+              <p
+                className={
+                  coinInfo.market_data?.price_change_percentage_24h! > 0
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                {coinInfo.market_data?.price_change_percentage_24h.toFixed(2)}
+              </p>
+            </div>
+            <div className="p-3 shadow-md">
+              <p className="text-xl font-bold">Price Change 7d</p>
+              <p
+                className={
+                  coinInfo.market_data?.price_change_percentage_7d! > 0
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                {coinInfo.market_data?.price_change_percentage_7d.toFixed(2)}
+              </p>
+            </div>
+            <div className="p-3 shadow-md">
+              <p className="text-xl font-bold">Price Change 14d</p>
+              <p
+                className={
+                  coinInfo.market_data?.price_change_percentage_14d! > 0
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                {coinInfo.market_data?.price_change_percentage_14d.toFixed(2)}
+              </p>
+            </div>
           </div>
         </div>
-        <section>
-          <p>About {coinInfo.name}</p>
-          <p>{coinInfo.description.en}</p>
+        <section className="mt-10">
+          <p className="text-2xl font-bold">About {coinInfo.name}</p>
+          <p
+            dangerouslySetInnerHTML={{ __html: coinInfo.description.en }}
+            className="mt-5"
+          ></p>
         </section>
       </Container>
     </>
