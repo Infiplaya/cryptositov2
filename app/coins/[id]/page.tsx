@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
 import { Container } from "../../Container";
+import { CoinDescription } from "./CoinDescription";
 
 const CoinResults = z.object({
   name: z.string(),
@@ -60,8 +61,10 @@ async function getCoin(id: string) {
   return coinInfo;
 }
 
+
 export default async function CoinPage({ params }: any) {
   const coinInfo = await getCoin(params.id);
+
   return (
     <>
       <Container>
@@ -165,15 +168,10 @@ export default async function CoinPage({ params }: any) {
               </p>
             </div>
           </div>
+          <CoinDescription  name={coinInfo.name} description={coinInfo.description.en}/>
         </div>
-        <section className="mt-10">
-          <p className="text-2xl font-bold">About {coinInfo.name}</p>
-          <p
-            dangerouslySetInnerHTML={{ __html: coinInfo.description.en }}
-            className="mt-5"
-          ></p>
-        </section>
       </Container>
     </>
   );
 }
+

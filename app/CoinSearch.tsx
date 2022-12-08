@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { CoinItem } from "./CoinItem";
-import { CryptoData } from "./page";
+import { CryptoData } from "./CoinsContainer";
 
 export function CoinSearch({ coins }: { coins: CryptoData }) {
   const [searchText, setSearchText] = useState("");
