@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import { Container } from "./Container";
-import { TrendingCoins } from "./TrendingCoins";
-import { CoinsContainer } from "./CoinsContainer";
-import { LoadingSkeleton } from "./LoadingSkeleton";
+import { Container } from "./Components/Container";
+import { TrendingCoins } from "./Components/TrendingCoins";
+import { CoinsContainer } from "./Components/CoinsContainer";
+import { LoadingSkeleton } from "./Components/LoadingSkeleton";
 
 export default async function Home() {
   return (

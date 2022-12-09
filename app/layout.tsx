@@ -1,10 +1,11 @@
 import "./globals.css";
 import { Inter } from "@next/font/google";
-import { Navbar } from "./Navbar";
+import { Navbar } from "./Components/Navbar";
 import { Providers } from "./providers";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { Suspense } from "react";
 config.autoAddCss = false;
 
 // If loading a variable font, you don't need to specify the font weight
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body className="bg-gray-100 dark:bg-gray-800">
         <Providers>
           <Navbar />
-          {children}
+          <Suspense>{children}</Suspense>
         </Providers>
       </body>
     </html>

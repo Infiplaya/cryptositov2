@@ -22,7 +22,7 @@ export type CryptoData = z.infer<typeof cryptosResult>;
 async function getMarketData() {
   const url =
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true";
-  const res = await fetch(url,{ next: { revalidate: 60 } });
+  const res = await fetch(url, { next: { revalidate: 60 } });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
