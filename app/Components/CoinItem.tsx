@@ -26,7 +26,7 @@ type Coin = z.infer<typeof coinSchema>;
 export const CoinItem = ({ coin }: { coin: Coin }) => {
   return (
     <tr className="h-[80px] border-b dark:border-gray-700 overflow-hidden">
-      <td>
+      <td className="w-20">
         <FontAwesomeIcon icon={outlineStar} />
       </td>
       <td>{coin.market_cap_rank}</td>
