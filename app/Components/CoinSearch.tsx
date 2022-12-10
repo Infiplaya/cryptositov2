@@ -56,6 +56,14 @@ export function CoinSearch({ coins }: { coins: CryptoData }) {
   const [sortKey, setSortKey] = useState<SortKeys>("market_cap_rank");
   const [sortOrder, setSortOrder] = useState<SortOrder>("ascn");
 
+  function hideRows(key:string) {
+    if (key === "total_volume" || key === "market_cap") {
+      return "hidden md:table-cell"
+    } else {
+      return;
+    }
+  }
+
   const headers: { key: SortKeys; label: string }[] = [
     { key: "market_cap_rank", label: "#" },
     { key: "name", label: "Coin" },
@@ -97,7 +105,7 @@ export function CoinSearch({ coins }: { coins: CryptoData }) {
             <td></td>
             {headers.map((row) => {
               return (
-                <td key={row.key}>
+                <td key={row.key} className={hideRows(row.key)}>
                   {row.label}{" "}
                   <SortButton
                     columnKey={row.key}

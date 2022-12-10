@@ -18,7 +18,7 @@ const Pagination = ({
   return (
     <>
       <h1 className="text-lg font-bold mt-5">Pages</h1>
-      <div className="flex gap-3 mt-3">
+      <div className="flex flex-wrap gap-3 mt-3">
         {pages.map((page, index) => {
           return (
             <button
