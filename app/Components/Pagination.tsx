@@ -24,7 +24,9 @@ const Pagination = ({
             <button
               key={index}
               onClick={() => setCurrentPage(page)}
-              className={`p-3 w-16 rounded-lg bg-gray-900 ${page == currentPage ? "font-bold bg-gray-700" : ""}`}
+              className={`p-3 w-16 rounded-lg dark:bg-gray-900 shadow-md border-gray-300 border dark:border-none  ${
+                page == currentPage ? "font-bold dark:bg-gray-700" : ""
+              }`}
             >
               {page}
             </button>
