@@ -88,7 +88,7 @@ export function CoinSearch({ coins }: { coins: CryptoData }) {
   return (
     <div>
       <div className="mt-10">
-        <h3 className="text-2xl font-bold">Search Cryptos</h3>
+        <h3 className="text-2xl font-bold mb-2">Search Cryptos</h3>
         <form className="mt-2">
           <input
             type="text"
