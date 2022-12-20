@@ -1,9 +1,15 @@
+"use client";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as outlineStar } from "@fortawesome/free-regular-svg-icons";
 import Image from "next/image";
 import { z } from "zod";
 import Link from "next/link";
+import { UserAuth } from "../context/AuthContext";
+import { db } from "../firebase";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {useState} from "react";
 
 const coinSchema = z.object({
   market_cap_rank: z.number(),
@@ -24,10 +30,32 @@ const coinSchema = z.object({
 type Coin = z.infer<typeof coinSchema>;
 
 export const CoinItem = ({ coin }: { coin: Coin }) => {
+  const [savedCoin, setSavedCoin] = useState(false);
+
+  const { user } = UserAuth();
+
+  const coinPath = doc(db, "users", `${user?.email}`);
+  const saveCoin = async () => {
+    if (user?.email) {
+      setSavedCoin(true);
+      await updateDoc(coinPath, {
+        watchList: arrayUnion({
+          id: coin.id,
+          name: coin.name,
+          image: coin.image,
+          rank: coin.market_cap_rank,
+          symbol: coin.symbol,
+        }),
+      });
+    } else {
+      alert("you must be signed in");
+    }
+  };
+
   return (
     <tr className="h-[80px] border-b dark:border-gray-700 overflow-hidden">
-      <td className="w-20">
-        <FontAwesomeIcon icon={outlineStar} />
+      <td className="w-20" onClick={saveCoin}>
+        <FontAwesomeIcon icon={savedCoin ? faStar : outlineStar} cursor={`pointer`} />
       </td>
       <td>{coin.market_cap_rank}</td>
       <td>

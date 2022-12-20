@@ -6,9 +6,24 @@ import ThemeSwitch from "./ThemeSwitch";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { UserAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const { user, logOut } = UserAuth();
+
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+      router.push("/");
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   function handleNav() {
     setIsNavOpen((previous) => !previous);
@@ -19,22 +34,34 @@ export const Navbar = () => {
         <nav className="flex gap-5 text-sm font-semibold align-middle items-center">
           <NavLink
             href={`/`}
-            classNames="text-2xl italic antialiased tracking-wide"
+            classNames="text-2xl italic antialiased tracking-wide mr-auto"
           >
             Cryptosito
           </NavLink>
-          <NavLink href={`/account`} classNames="ml-auto hidden md:block">
-            Profile
-          </NavLink>
-          <NavLink href={`/signin`} classNames="hidden md:block">
-            Sign In
-          </NavLink>
-          <NavLink
-            href={`/signup`}
-            classNames="px-3 rounded-lg py-1 bg-blue-500 text-gray-50 hidden md:block"
-          >
-            Sign Up
-          </NavLink>
+          {user?.email ? (
+            <>
+              <NavLink href={`/account`}>Account</NavLink>
+              <button
+                onClick={handleSignOut}
+                className="px-3 rounded-lg py-1 bg-blue-500 text-gray-50 hidden md:block"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink href={`/signin`} classNames="hidden md:block">
+                Sign In
+              </NavLink>
+              <NavLink
+                href={`/signup`}
+                classNames="px-3 rounded-lg py-1 bg-blue-500 text-gray-50 hidden md:block"
+              >
+                Sign Up
+              </NavLink>
+            </>
+          )}
+
           <div className="hidden md:block">
             <ThemeSwitch />
           </div>
