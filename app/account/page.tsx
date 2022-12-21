@@ -21,9 +21,8 @@ const Account = () => {
 
   return (
     <Container>
-      <h1 className="text-3xl mt-10 font-bold">Welcome, {user?.email}</h1>
-      <button className="px-4 py-2 bg-blue-500 font-medium rounded-lg" onClick={handleSignOut}>Sign out</button>
-      <p>Your watchlist:</p>
+      <h1 className="text-2xl mt-10 font-bold">Welcome, {user?.email}</h1>
+      <p className="mt-5">Your watchlist:</p>
       <Watchlist />
     </Container>
   );

@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 
 export const FilterableCoinsTable = ({ coins }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [coinsPerPage, setCoinsPerPage] = useState(10);
+  const [coinsPerPage, setCoinsPerPage] = useState(20);
 
   const lastCoinIndex = currentPage * coinsPerPage;
   const firstCoinIndex = lastCoinIndex - coinsPerPage;

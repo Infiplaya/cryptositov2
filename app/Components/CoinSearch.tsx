@@ -56,9 +56,9 @@ export function CoinSearch({ coins }: { coins: CryptoData }) {
   const [sortKey, setSortKey] = useState<SortKeys>("market_cap_rank");
   const [sortOrder, setSortOrder] = useState<SortOrder>("ascn");
 
-  function hideRows(key:string) {
+  function hideRows(key: string) {
     if (key === "total_volume" || key === "market_cap") {
-      return "hidden md:table-cell"
+      return "hidden md:table-cell";
     } else {
       return;
     }
@@ -98,44 +98,45 @@ export function CoinSearch({ coins }: { coins: CryptoData }) {
           />
         </form>
       </div>
-
-      <table className="mt-10 w-full border-collapse text-center">
-        <thead>
-          <tr>
-            <td></td>
-            {headers.map((row) => {
-              return (
-                <td key={row.key} className={hideRows(row.key)}>
-                  {row.label}{" "}
-                  <SortButton
-                    columnKey={row.key}
-                    onClick={() => changeSort(row.key)}
-                    {...{
-                      sortOrder,
-                      sortKey,
-                    }}
-                  />
-                </td>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {sortedCoins()
-            .filter((val: any) => {
-              if (searchText === "") {
-                return val;
-              } else if (
-                val.name.toLowerCase().includes(searchText.toLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map((coin) => (
-              <CoinItem coin={coin} key={coin.id} />
-            ))}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto relative mt-5">
+        <table className="w-full text-sm text-left font-semibold text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th className="py-3 px-6"></th>
+              {headers.map((row) => {
+                return (
+                  <td key={row.key} className={`${hideRows(row.key)} py-3 px-6`}>
+                    {row.label}{" "}
+                    <SortButton
+                      columnKey={row.key}
+                      onClick={() => changeSort(row.key)}
+                      {...{
+                        sortOrder,
+                        sortKey,
+                      }}
+                    />
+                  </td>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {sortedCoins()
+              .filter((val: any) => {
+                if (searchText === "") {
+                  return val;
+                } else if (
+                  val.name.toLowerCase().includes(searchText.toLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((coin) => (
+                <CoinItem coin={coin} key={coin.id} />
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

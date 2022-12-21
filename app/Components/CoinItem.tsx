@@ -9,7 +9,7 @@ import Link from "next/link";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import {useState} from "react";
+import { useState } from "react";
 
 const coinSchema = z.object({
   market_cap_rank: z.number(),
@@ -53,14 +53,17 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
   };
 
   return (
-    <tr className="h-[80px] border-b dark:border-gray-700 overflow-hidden">
-      <td className="w-20" onClick={saveCoin}>
-        <FontAwesomeIcon icon={savedCoin ? faStar : outlineStar} cursor={`pointer`} />
+    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <td className="py-4 px-6" onClick={saveCoin}>
+        <FontAwesomeIcon
+          icon={savedCoin ? faStar : outlineStar}
+          cursor={`pointer`}
+        />
       </td>
-      <td>{coin.market_cap_rank}</td>
-      <td>
+      <td className="py-4 px-6">{coin.market_cap_rank}</td>
+      <td className="py-4 px-6">
         <Link href={`/coins/${coin.id}`}>
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
             <Image
               className="w-6 mr-2 rounded-full"
               alt="coin-image"
@@ -68,26 +71,25 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
               width={20}
               height={20}
             />
-            <p className="hidden sm:table-cell">
-              {coin.name} {coin.symbol.toUpperCase()}
-            </p>
+            <p className="hidden sm:table-cell">{coin.name}</p>
+            <p>{coin.symbol.toUpperCase()}</p>
           </div>
         </Link>
       </td>
-      <td>${coin.current_price.toLocaleString()}</td>
+      <td className="py-4 px-6">${coin.current_price.toLocaleString()}</td>
       <td
-        className={
+        className={`${
           coin.price_change_percentage_24h > 0
             ? "text-green-500"
             : "text-red-500"
-        }
+        } py-4 px-6`}
       >
         {coin.price_change_percentage_24h.toFixed(2)}%
       </td>
-      <td className="w-[180px] hidden md:table-cell">
+      <td className="py-4 px-6 hidden md:table-cell">
         ${coin.total_volume.toLocaleString()}
       </td>
-      <td className="w-[180px] hidden md:table-cell">
+      <td className="py-4 px-6 hidden md:table-cell">
         ${coin.market_cap.toLocaleString()}
       </td>
     </tr>

@@ -21,13 +21,13 @@ export function Watchlist() {
   }, [user?.email]);
 
   const coinPath = doc(db, "users", `${user?.email}`);
-  const deleteCoin = async (passedid:string) => {
+  const deleteCoin = async (passedid: string) => {
     try {
-      const result = coins.filter((coin:any) => coin.id !== passedid);
+      const result = coins.filter((coin: any) => coin.id !== passedid);
       await updateDoc(coinPath, {
         watchList: result,
       });
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message);
     }
   };
@@ -37,41 +37,50 @@ export function Watchlist() {
       {coins.length === 0 ? (
         <p>Don&apos;t have any coins</p>
       ) : (
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="text-center">#</th>
-              <th>Coin</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-            {coins.map((coin:any) => (
-              <tr key={coin.id}>
-                <td>{coin?.rank}</td>
-                <td>
-                  <Link href={`/coins/${coin.id}`}>
-                    <Image
-                      src={coin.image}
-                      alt="coin"
-                      width={100}
-                      height={100}
-                    ></Image>
-                    <p>{coin.name}</p>
-                    <p>{coin.symbol}</p>
-                  </Link>
-                </td>
-                <td>
-                  <FontAwesomeIcon
-                    icon={faClose}
-                    onClick={() => deleteCoin(coin.id)}
-                    cursor={`pointer`}
-                  ></FontAwesomeIcon>
-                </td>
+        <div className="overflow-x-auto relative mt-5">
+          <table className="w-full text-sm text-left text-gray-500 font-semibold dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th className="py-3 px-6">#</th>
+                <th className="py-3 px-6">Coin</th>
+                <th className="py-3 px-6">Remove</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {coins.map((coin: any) => (
+                <tr
+                  key={coin.id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <td className="py-4 px-6">{coin?.rank}</td>
+                  <td className="py-4 px-6">
+                    <Link
+                      href={`/coins/${coin.id}`}
+                      className="flex items-center gap-3"
+                    >
+                      <Image
+                        src={coin.image}
+                        className="w-6 mr-2 rounded-full"
+                        alt="coin"
+                        width={20}
+                        height={20}
+                      ></Image>
+                      <p>{coin.name}</p>
+                      <p>{coin.symbol.toUpperCase()}</p>
+                    </Link>
+                  </td>
+                  <td className="py-4 px-6">
+                    <FontAwesomeIcon
+                      icon={faClose}
+                      onClick={() => deleteCoin(coin.id)}
+                      cursor={`pointer`}
+                    ></FontAwesomeIcon>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

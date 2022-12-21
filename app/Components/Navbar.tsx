@@ -20,7 +20,7 @@ export const Navbar = () => {
     try {
       await logOut();
       router.push("/");
-    } catch (e:any) {
+    } catch (e: any) {
       console.log(e.message);
     }
   };
@@ -40,7 +40,9 @@ export const Navbar = () => {
           </NavLink>
           {user?.email ? (
             <>
-              <NavLink href={`/account`}>Account</NavLink>
+              <NavLink href={`/account`} classNames="hidden md:block">
+                Account
+              </NavLink>
               <button
                 onClick={handleSignOut}
                 className="px-3 rounded-lg py-1 bg-blue-500 text-gray-50 hidden md:block"
