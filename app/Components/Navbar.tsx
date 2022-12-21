@@ -29,9 +29,9 @@ export const Navbar = () => {
     setIsNavOpen((previous) => !previous);
   }
   return (
-    <header className="p-4 bg-gray-50 dark:bg-gray-900 shadow-sm">
+    <header className="bg-gray-50 dark:bg-gray-900 shadow-sm">
       <Container>
-        <nav className="flex gap-5 text-sm font-semibold align-middle items-center">
+        <nav className="flex gap-5 text-sm font-semibold align-middle items-center p-4 border-b border-gray-200 dark:border-gray-700">
           <NavLink
             href={`/`}
             classNames="text-2xl italic antialiased tracking-wide mr-auto"
@@ -78,7 +78,6 @@ export const Navbar = () => {
             />
           </div>
         </nav>
-
         {/* mobile nav */}
         <nav
           className={
@@ -88,15 +87,21 @@ export const Navbar = () => {
           }
         >
           <NavLink href={`/`}>Home</NavLink>
-          <NavLink href={`/account`}>Account</NavLink>
+          {user ? (
+            <NavLink href={`/account`}>Account</NavLink>
+          ) : (
+            <>
+              {" "}
+              <NavLink href={`/signin`}>Sign In</NavLink>
+              <NavLink
+                href={`/signup`}
+                classNames="px-3 py-1 rounded-lg bg-blue-500"
+              >
+                Sign Up
+              </NavLink>{" "}
+            </>
+          )}
           <ThemeSwitch />
-          <NavLink href={`/signin`}>Sign In</NavLink>
-          <NavLink
-            href={`/signup`}
-            classNames="px-3 py-1 rounded-lg bg-blue-500"
-          >
-            Sign Up
-          </NavLink>
         </nav>
       </Container>
     </header>

@@ -19,14 +19,14 @@ const SignUp = () => {
     router.push('/account')
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     setError("");
     try {
       await signUp(email, password);
       redirect();
 
-    } catch (e) {
+    } catch (e:any) {
       setError(e.message);
       console.log(e.message);
     }
