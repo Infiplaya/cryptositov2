@@ -20,7 +20,7 @@ export const Navbar = () => {
     try {
       await logOut();
       router.push("/");
-    } catch (e) {
+    } catch (e:any) {
       console.log(e.message);
     }
   };

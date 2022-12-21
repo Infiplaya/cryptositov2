@@ -91,19 +91,19 @@ export async function CoinInfo({ id }: {id: string}) {
               </p>
             ) : null}
           </div>
-          <div className="p-3 shadow-md mt-5">
+          <div className="p-3 shadow-md mt-5 dark:shadow-gray-700 rounded-lg">
             <p className="text-xl font-bold">Market Cap</p>
             {coinInfo.market_data?.market_cap ? (
               <p>${coinInfo.market_data.market_cap.usd.toLocaleString()}</p>
             ) : null}
           </div>
-          <div className="p-3 shadow-md mt-5">
+          <div className="p-3 shadow-md mt-5 dark:shadow-gray-700 rounded-lg">
             <p className="text-xl font-bold">Volume 24h</p>
             {coinInfo.market_data?.total_volume ? (
               <p>${coinInfo.market_data.total_volume.usd?.toLocaleString()}</p>
             ) : null}
           </div>
-          <div className="flex gap-5 p-3 shadow-md mt-5">
+          <div className="flex gap-5 p-3 shadow-md dark:shadow-gray-700 mt-5 rounded-lg">
             <div className="border-r-2 dark:border-gray-700  p-3">
               <p className="text-xl font-bold">24 High</p>
               {coinInfo.market_data?.high_24h ? (
@@ -125,7 +125,7 @@ export async function CoinInfo({ id }: {id: string}) {
           </div>
         </div>
         <div>
-          <div className="p-3 shadow-md">
+          <div className="p-3 shadow-md dark:shadow-gray-700 rounded-lg">
             <p className="text-xl font-bold">Price Change 24h</p>
             <p
               className={
@@ -137,7 +137,7 @@ export async function CoinInfo({ id }: {id: string}) {
               {coinInfo.market_data?.price_change_percentage_24h.toFixed(2)}
             </p>
           </div>
-          <div className="p-3 shadow-md">
+          <div className="p-3 shadow-md dark:shadow-gray-700 rounded-lg">
             <p className="text-xl font-bold">Price Change 7d</p>
             <p
               className={
@@ -149,7 +149,7 @@ export async function CoinInfo({ id }: {id: string}) {
               {coinInfo.market_data?.price_change_percentage_7d.toFixed(2)}
             </p>
           </div>
-          <div className="p-3 shadow-md">
+          <div className="p-3 shadow-md dark:shadow-gray-700 rounded-lg">
             <p className="text-xl font-bold">Price Change 14d</p>
             <p
               className={

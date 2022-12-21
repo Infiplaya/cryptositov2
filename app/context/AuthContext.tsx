@@ -13,10 +13,10 @@ import {
 
 import { doc, setDoc } from "firebase/firestore";
 
-const UserContext = createContext({});
+const UserContext = createContext<any | null>(null);
 
 export const AuthContextProvider = ({ children }: any) => {
-    const [user, setUser] = useState<any>({});
+    const [user, setUser] = useState<any | null>(null);
 
   const signUp = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password);

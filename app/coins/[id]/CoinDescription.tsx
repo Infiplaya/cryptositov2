@@ -1,14 +1,6 @@
 "use client";
 import { useState } from "react";
 
-function truncateString(str: string, num: number) {
-  if (str.length <= num) {
-    return str;
-  }
-  // Return str truncated with '...' concatenated to the end of str.
-  return str.slice(0, num) + "...";
-}
-
 export function CoinDescription({
   description,
   name,
@@ -17,6 +9,17 @@ export function CoinDescription({
   name: string;
 }) {
   const [showMore, setShowMore] = useState(false);
+  const [canShowMore, setCanShowMore] = useState(true);
+
+  function truncateString(str: string, num: number) {
+    if (str.length <= num) {
+      setCanShowMore(false);
+      return str;
+    }
+    // Return str truncated with '...' concatenated to the end of str.
+    return str.slice(0, num) + "...";
+  }
+
   return (
     <section className="mt-5">
       <p className="text-2xl font-bold">About {name}</p>
@@ -36,10 +39,12 @@ export function CoinDescription({
         ></p>
       )}
       <button
-        className="py-3 bg-gradient-to-t from-transparent via-gray-900 to-transparent w-full font-bold text-gray-200 rounded-lg"
+        className="py-3 bg-gray-500/20 w-full font-bold text-gray-200 rounded-lg mt-5"
         onClick={() => setShowMore((prev) => !prev)}
       >
-        {showMore ? "Show less" : "Show more"}
+        <p className="text-gray-600 dark:text-gray-200">
+          {canShowMore && showMore ? "Show less" : "Show more"}
+        </p>
       </button>
     </section>
   );
