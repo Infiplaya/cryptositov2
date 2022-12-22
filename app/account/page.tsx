@@ -21,17 +21,15 @@ const Account = () => {
 
   useEffect(() => {
     // checks if the user is authenticated
-    user
-    ? router.push("/dashboard")
-    : router.push("/signup");
+    user ? router.push("/dashboard") : router.push("/signup");
   }, [user, router]);
 
   return (
-    <Container>
+    <>
       <h1 className="text-2xl mt-10 font-bold">Welcome, {user?.email}</h1>
       <p className="mt-5 text-xl font-medium">Your watchlist:</p>
       <Watchlist />
-    </Container>
+    </>
   );
 };
 

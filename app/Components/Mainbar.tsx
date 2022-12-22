@@ -47,6 +47,13 @@ export const Mainbar = () => {
             >
               Account
             </NavLink>
+            <NavLink
+              href={`/community`}
+              classNames="hidden md:block"
+              setIsNavOpen={setIsNavOpen}
+            >
+              Community
+            </NavLink>
             <button
               onClick={handleSignOut}
               className="px-3 rounded-lg py-1 bg-blue-500 text-gray-50 hidden md:block"
@@ -101,6 +108,13 @@ export const Mainbar = () => {
           <>
             <NavLink href={`/account`} setIsNavOpen={setIsNavOpen}>
               Account
+            </NavLink>
+            <NavLink
+              href={`/community`}
+              classNames="hidden md:block"
+              setIsNavOpen={setIsNavOpen}
+            >
+              Community
             </NavLink>
             <button
               onClick={handleSignOut}

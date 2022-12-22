@@ -9,6 +9,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Suspense } from "react";
 import { Footer } from "./Components/Footer";
+import { Container } from "./Components/Container";
 
 config.autoAddCss = false;
 
@@ -30,7 +31,9 @@ export default function RootLayout({
       <body className="bg-gray-100 dark:bg-gray-800">
         <Providers>
           <Navbar />
-          <Suspense>{children}</Suspense>
+          <Suspense>
+            <Container>{children}</Container>
+          </Suspense>
           <Footer />
         </Providers>
       </body>
