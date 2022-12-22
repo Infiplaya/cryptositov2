@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { Container } from "./Components/Container";
 
 export default function Error({
   error,
@@ -15,9 +16,11 @@ export default function Error({
   }, [error]);
 
   return (
-    <div>
-      <p>Something went wrong!</p>
-      <button onClick={() => reset()}>Reset error boundary</button>
-    </div>
+    <Container>
+      <p className="text-xl font-bold">Something went wrong!</p>
+      <button onClick={() => reset()} className="bg-blue-500 p-2 rounded-lg">
+        Reset error boundary
+      </button>
+    </Container>
   );
 }

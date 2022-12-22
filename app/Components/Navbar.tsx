@@ -35,12 +35,17 @@ export const Navbar = () => {
           <NavLink
             href={`/`}
             classNames="text-2xl italic antialiased tracking-wide mr-auto"
+            setIsNavOpen={setIsNavOpen}
           >
             Cryptosito
           </NavLink>
           {user?.email ? (
             <>
-              <NavLink href={`/account`} classNames="hidden md:block">
+              <NavLink
+                href={`/account`}
+                classNames="hidden md:block"
+                setIsNavOpen={setIsNavOpen}
+              >
                 Account
               </NavLink>
               <button
@@ -52,12 +57,17 @@ export const Navbar = () => {
             </>
           ) : (
             <>
-              <NavLink href={`/signin`} classNames="hidden md:block">
+              <NavLink
+                href={`/signin`}
+                classNames="hidden md:block"
+                setIsNavOpen={setIsNavOpen}
+              >
                 Sign In
               </NavLink>
               <NavLink
                 href={`/signup`}
                 classNames="px-3 rounded-lg py-1 bg-blue-500 text-gray-50 hidden md:block"
+                setIsNavOpen={setIsNavOpen}
               >
                 Sign Up
               </NavLink>
@@ -86,16 +96,31 @@ export const Navbar = () => {
               : "hidden"
           }
         >
-          <NavLink href={`/`}>Home</NavLink>
+          <NavLink href={`/`} setIsNavOpen={setIsNavOpen}>
+            Home
+          </NavLink>
           {user ? (
-            <NavLink href={`/account`}>Account</NavLink>
+            <>
+              <NavLink href={`/account`} setIsNavOpen={setIsNavOpen}>
+                Account
+              </NavLink>
+              <button
+                onClick={handleSignOut}
+                className="px-3 rounded-lg py-1 bg-blue-500 text-gray-50"
+              >
+                Sign Out
+              </button>
+            </>
           ) : (
             <>
               {" "}
-              <NavLink href={`/signin`}>Sign In</NavLink>
+              <NavLink href={`/signin`} setIsNavOpen={setIsNavOpen}>
+                Sign In
+              </NavLink>
               <NavLink
                 href={`/signup`}
                 classNames="px-3 py-1 rounded-lg bg-blue-500"
+                setIsNavOpen={setIsNavOpen}
               >
                 Sign Up
               </NavLink>{" "}
