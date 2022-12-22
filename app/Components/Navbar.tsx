@@ -31,7 +31,7 @@ export const Navbar = () => {
   return (
     <header className="bg-gray-50 dark:bg-gray-900 shadow-sm">
       <Container>
-        <nav className="flex gap-5 text-sm font-semibold align-middle items-center p-4 border-b border-gray-200 dark:border-gray-700">
+        <nav className="flex gap-5 text-sm font-semibold align-middle items-center p-4 border-b border-gray-200 md:border-none dark:border-gray-700">
           <NavLink
             href={`/`}
             classNames="text-2xl italic antialiased tracking-wide mr-auto"
