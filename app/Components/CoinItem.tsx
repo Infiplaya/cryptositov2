@@ -63,7 +63,7 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
       <td className="py-4 px-6">{coin.market_cap_rank}</td>
       <td className="py-4 px-6">
         <Link href={`/coins/${coin.id}`}>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             <Image
               className="w-6 mr-2 rounded-full"
               alt="coin-image"
@@ -71,7 +71,7 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
               width={20}
               height={20}
             />
-            <p className="hidden sm:table-cell">{coin.name}</p>
+            <p className="hidden sm:table-cell text-gray-800 dark:text-gray-100">{coin.name}</p>
             <p>{coin.symbol.toUpperCase()}</p>
           </div>
         </Link>
