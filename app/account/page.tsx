@@ -21,7 +21,7 @@ const Account = () => {
 
   useEffect(() => {
     // checks if the user is authenticated
-    user ? router.push("/dashboard") : router.push("/signup");
+    user ? router.push("/account") : router.push("/signup");
   }, [user, router]);
 
   return (
