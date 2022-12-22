@@ -8,9 +8,11 @@ export default async function Home() {
   return (
     <Container>
       <Suspense fallback={<LoadingSkeleton />}>
+        {/* @ts-expect-error Server Component */}
         <TrendingCoins />
       </Suspense>
       <Suspense fallback={<LoadingSkeleton />}>
+        {/* @ts-expect-error Server Component */}
         <CoinsContainer />
       </Suspense>
     </Container>

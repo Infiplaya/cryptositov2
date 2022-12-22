@@ -10,6 +10,7 @@ export default async function CoinPage({ params }: any) {
     <>
       <Container>
         <Suspense fallback={<LoadingSkeleton />}>
+          {/* @ts-expect-error Server Component */}
           <CoinInfo id={params.id} />
         </Suspense>
       </Container>

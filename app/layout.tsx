@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import "./globals.css";
 import { Inter } from "@next/font/google";
 import { Navbar } from "./Components/Navbar";
@@ -7,6 +9,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Suspense } from "react";
 import { Footer } from "./Components/Footer";
+
 config.autoAddCss = false;
 
 // If loading a variable font, you don't need to specify the font weight

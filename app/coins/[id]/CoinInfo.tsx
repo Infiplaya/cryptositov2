@@ -48,7 +48,7 @@ export type Coin = z.infer<typeof CoinResults>;
 
 async function getCoin(id: string) {
   const url = `https://api.coingecko.com/api/v3/coins/${id}?localization=false`;
-  const res = await fetch(url, { cache: 'force-cache' });
+  const res = await fetch(url, { next: { revalidate: 60 * 60 } });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

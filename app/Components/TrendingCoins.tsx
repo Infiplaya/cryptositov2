@@ -19,7 +19,7 @@ export type TrendingCoins = z.infer<typeof TrendingsResult>;
 
 async function getTrendingData() {
   const url = "https://api.coingecko.com/api/v3/search/trending";
-  const res = await fetch(url);
+  const res = await fetch(url, { next: { revalidate: 60 * 60 } });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
