@@ -3,6 +3,7 @@ import { Container } from "../Components/Container";
 import { Watchlist } from "./watchlist";
 import { UserAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Account = () => {
   const { user, logOut } = UserAuth();
@@ -18,17 +19,20 @@ const Account = () => {
     }
   };
 
-  if (user) {
-    return (
-      <Container>
-        <h1 className="text-2xl mt-10 font-bold">Welcome, {user?.email}</h1>
-        <p className="mt-5 text-xl font-medium">Your watchlist:</p>
-        <Watchlist />
-      </Container>
-    );
-  } else {
-    router.push("/signup")
-  }
+  useEffect(() => {
+    // checks if the user is authenticated
+    user
+    ? router.push("/dashboard")
+    : router.push("/signup");
+  }, [user, router]);
+
+  return (
+    <Container>
+      <h1 className="text-2xl mt-10 font-bold">Welcome, {user?.email}</h1>
+      <p className="mt-5 text-xl font-medium">Your watchlist:</p>
+      <Watchlist />
+    </Container>
+  );
 };
 
 export default Account;
