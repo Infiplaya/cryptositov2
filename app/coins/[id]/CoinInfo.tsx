@@ -166,9 +166,6 @@ export async function CoinInfo({ id }: { id: string }) {
             </p>
           </div>
         </div>
-        {coinInfo.market_data && (
-          <CryptoChart market_data={coinInfo.market_data} />
-        )}
         <CoinDescription
           name={coinInfo.name}
           description={coinInfo.description.en}
