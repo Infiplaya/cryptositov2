@@ -20,7 +20,7 @@ export const FormPost = () => {
 
   useEffect(() => {
     // checks if the user is authenticated
-    user ? router.push("/community") : router.push("/signup");
+    user ? router.push("/community/createpost") : router.push("/signup");
   }, [user, router]);
   
 
