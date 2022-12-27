@@ -34,7 +34,7 @@ async function getTrendingData() {
 export const TrendingCoins = async () => {
   const trendingCoins = await getTrendingData();
   return (
-    <div className="my-2 md:my-12 py-8">
+    <div className="my-2 md:my-12">
       <h1 className="text-2xl font-bold mb-2">Trending Coins</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {trendingCoins.coins.map((coin) => (

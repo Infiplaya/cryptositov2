@@ -11,7 +11,9 @@ import {
 import { db } from "../firebase";
 import { IPost } from "./Posts";
 import { UserAuth } from "../context/AuthContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   post: IPost;
@@ -74,7 +76,7 @@ export const Post = (props: Props) => {
   }
 
   return (
-    <div className="dark:bg-gray-700 bg-gray-50 shadow-md p-10 mb-3 mt-3 lg:w-1/3 rounded-lg">
+    <div className="dark:bg-gray-900 bg-gray-50 shadow-md p-10 mb-3 mt-3 lg:w-1/3 rounded-lg">
       <div>
         <p>{post.description}</p>
       </div>
@@ -84,9 +86,9 @@ export const Post = (props: Props) => {
         </p>
         <button
           onClick={hasUserLiked ? removeLike : addLike}
-          className="mt-3 bg-blue-500 p-1 rounded-lg"
+          className="mt-3 p-1 rounded-lg"
         >
-          {hasUserLiked ? "👎" : "👍"}
+          <FontAwesomeIcon icon={hasUserLiked ? faThumbsDown : faThumbsUp} size="xl" />
         </button>
         {likes && hasUserLiked && <p> Likes: {likes?.length} </p>}
       </div>

@@ -7,6 +7,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import { UserAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface FormData {
   description: string;
@@ -16,6 +17,12 @@ export const FormPost = () => {
   const { user } = UserAuth();
 
   const router = useRouter();
+
+  useEffect(() => {
+    // checks if the user is authenticated
+    user ? router.push("/community") : router.push("/signup");
+  }, [user, router]);
+  
 
   const schema = yup.object().shape({
     description: yup.string().required("Post can't be empty.").min(10).max(400),

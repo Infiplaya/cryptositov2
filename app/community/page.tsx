@@ -1,12 +1,21 @@
+"use client"
 import Link from "next/link";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "../firebase";
+import { useEffect } from "react";
 import { Posts } from "./Posts";
+import { useRouter } from "next/navigation";
+import { UserAuth } from "../context/AuthContext";
 
 export default function Page() {
+  const router = useRouter();
+  const {user} = UserAuth();
+  useEffect(() => {
+    // checks if the user is authenticated
+    user ? router.push("/community") : router.push("/signup");
+  }, [user, router]);
+  
   return (
     <div className="p-4">
-      <h2>Posts here</h2>
+      <h2 className="text-center text-2xl font-bold">Posts wall</h2>
       <Posts />
       <Link href="/community/createpost">Create a new post</Link>
     </div>
