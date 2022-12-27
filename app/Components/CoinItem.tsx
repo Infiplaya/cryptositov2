@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { faStar as outlineStar } from "@fortawesome/free-regular-svg-icons";
 import Image from "next/image";
 import { z } from "zod";
@@ -10,6 +10,7 @@ import { UserAuth } from "../context/AuthContext";
 import { db } from "../firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
+import { Sparklines, SparklinesLine } from "react-sparklines";
 
 const coinSchema = z.object({
   market_cap_rank: z.number(),
@@ -71,7 +72,9 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
               width={20}
               height={20}
             />
-            <p className="hidden sm:table-cell text-gray-800 dark:text-gray-100">{coin.name}</p>
+            <p className="hidden sm:table-cell text-gray-800 dark:text-gray-100">
+              {coin.name}
+            </p>
             <p>{coin.symbol.toUpperCase()}</p>
           </div>
         </Link>
@@ -91,6 +94,11 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
       </td>
       <td className="py-4 px-6 hidden md:table-cell">
         ${coin.market_cap.toLocaleString()}
+      </td>
+      <td className="hidden md:table-cell">
+        <Sparklines data={coin.sparkline_in_7d.price}>
+          <SparklinesLine color={coin.price_change_percentage_24h > 0 ? "green" : "red"}/>
+        </Sparklines>
       </td>
     </tr>
   );

@@ -18,8 +18,6 @@ export function CoinDescription({
     return str.slice(0, num) + "...";
   }
 
-  console.log(description.length);
-
   return (
     <section className="mt-5">
       <p className="text-2xl font-bold">About {name}</p>

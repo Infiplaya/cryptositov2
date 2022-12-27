@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
 import { CoinDescription } from "./CoinDescription";
+import { CryptoChart } from "./CryptoChart";
 
 const CoinResults = z.object({
   name: z.string(),
@@ -37,6 +38,9 @@ const CoinResults = z.object({
         usd: z.number().optional(),
       }),
       circulating_supply: z.number(),
+      sparkline_7d: z.object({
+        price: z.array(z.number()),
+      }),
     })
     .optional()
     .nullable(),
@@ -47,7 +51,7 @@ const CoinResults = z.object({
 export type Coin = z.infer<typeof CoinResults>;
 
 async function getCoin(id: string) {
-  const url = `https://api.coingecko.com/api/v3/coins/${id}?localization=false`;
+  const url = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&sparkline=true`;
   const res = await fetch(url, { next: { revalidate: 60 * 60 } });
 
   if (!res.ok) {
@@ -60,7 +64,7 @@ async function getCoin(id: string) {
   return coinInfo;
 }
 
-export async function CoinInfo({ id }: {id: string}) {
+export async function CoinInfo({ id }: { id: string }) {
   const coinInfo = await getCoin(id);
   return (
     <>
@@ -162,6 +166,9 @@ export async function CoinInfo({ id }: {id: string}) {
             </p>
           </div>
         </div>
+        {coinInfo.market_data && (
+          <CryptoChart market_data={coinInfo.market_data} />
+        )}
         <CoinDescription
           name={coinInfo.name}
           description={coinInfo.description.en}

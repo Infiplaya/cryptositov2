@@ -118,6 +118,7 @@ export function CoinSearch({ coins }: { coins: CryptoData }) {
                   </td>
                 );
               })}
+              <th className="py-3 px-6">7D</th>
             </tr>
           </thead>
           <tbody>
