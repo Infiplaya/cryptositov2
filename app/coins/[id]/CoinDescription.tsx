@@ -9,16 +9,16 @@ export function CoinDescription({
   name: string;
 }) {
   const [showMore, setShowMore] = useState(false);
-  const [canShowMore, setCanShowMore] = useState(true);
 
   function truncateString(str: string, num: number) {
     if (str.length <= num) {
-      setCanShowMore(false);
       return str;
     }
     // Return str truncated with '...' concatenated to the end of str.
     return str.slice(0, num) + "...";
   }
+
+  console.log(description.length);
 
   return (
     <section className="mt-5">
@@ -38,14 +38,16 @@ export function CoinDescription({
           className="mt-5"
         ></p>
       )}
-      <button
-        className="py-3 bg-gray-500/20 w-full font-bold text-gray-200 rounded-lg mt-5"
-        onClick={() => setShowMore((prev) => !prev)}
-      >
-        <p className="text-gray-600 dark:text-gray-200">
-          {canShowMore && showMore ? "Show less" : "Show more"}
-        </p>
-      </button>
+      {description.length > 290 && (
+        <button
+          className="py-3 bg-gray-500/20 w-full font-bold text-gray-200 rounded-lg mt-5"
+          onClick={() => setShowMore((prev) => !prev)}
+        >
+          <p className="text-gray-600 dark:text-gray-200">
+            {showMore ? "Show less" : "Show more"}
+          </p>
+        </button>
+      )}
     </section>
   );
 }
