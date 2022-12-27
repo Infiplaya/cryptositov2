@@ -4,6 +4,7 @@ import { Watchlist } from "./watchlist";
 import { UserAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Link from "next/link";
 
 const Account = () => {
   const { user, logOut } = UserAuth();
@@ -27,6 +28,7 @@ const Account = () => {
   return (
     <>
       <h1 className="text-2xl mt-10 font-bold">Welcome, {user?.email}</h1>
+      <Link href={"/community/createpost"}><p className="text-xl text-blue p-3 bg-blue-500/20 w-48 rounded-lg mt-5">Post something!</p></Link>
       <p className="mt-5 text-xl font-medium">Your watchlist:</p>
       <Watchlist />
     </>
