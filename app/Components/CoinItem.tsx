@@ -95,7 +95,7 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
       <td className="py-4 px-6 hidden md:table-cell">
         ${coin.market_cap.toLocaleString()}
       </td>
-      <td className="hidden md:table-cell">
+      <td>
         <Sparklines data={coin.sparkline_in_7d.price}>
           <SparklinesLine color={coin.price_change_percentage_24h > 0 ? "green" : "red"}/>
         </Sparklines>
