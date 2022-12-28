@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
 import { CoinDescription } from "./CoinDescription";
-import { CryptoChart } from "./CryptoChart";
+
 
 const CoinResults = z.object({
   name: z.string(),
