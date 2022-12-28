@@ -97,7 +97,7 @@ export const CoinItem = ({ coin }: { coin: Coin }) => {
       </td>
       <td>
         <Sparklines data={coin.sparkline_in_7d.price}>
-          <SparklinesLine color={coin.price_change_percentage_24h > 0 ? "green" : "red"}/>
+          <SparklinesLine color={coin.price_change_percentage_24h > 0 ? "teal" : "red"}/>
         </Sparklines>
       </td>
     </tr>

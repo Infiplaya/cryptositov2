@@ -9,7 +9,7 @@ export const CryptoChart = (market_data: any) => {
         <SparklinesLine
           color={
             market_data && market_data?.price_change_percentage_24h > 0
-              ? "green"
+              ? "#253e56"
               : "red"
           }
         />

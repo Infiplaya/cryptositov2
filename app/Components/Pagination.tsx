@@ -9,31 +9,80 @@ const Pagination = ({
   setCurrentPage: any;
   currentPage: number;
 }) => {
-  let pages = [];
+  const totalPages = Math.ceil(totalCoins / coinsPerPage);
+  
+  // Display the current page, one page before, and one page ahead
+  const startPage = Math.max(currentPage - 1, 1);
+  const endPage = Math.min(currentPage + 1, totalPages);
+  const pageNumbers = Array.from(Array(endPage - startPage + 1).keys()).map(
+    num => num + startPage
+  );
 
-  for (let i = 1; i <= Math.ceil(totalCoins / coinsPerPage); i++) {
-    pages.push(i);
-  }
+
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleFirstClick = () => {
+    setCurrentPage(1);
+  };
+
+  const handleLastClick = () => {
+    setCurrentPage(totalPages);
+  };
 
   return (
-    <>
-      <h1 className="text-lg font-bold mt-5">Pages</h1>
-      <div className="flex flex-wrap gap-3 mt-3">
-        {pages.map((page, index) => {
-          return (
-            <button
-              key={index}
-              onClick={() => setCurrentPage(page)}
-              className={`p-3 w-16 rounded-lg dark:bg-gray-900 shadow-md border-gray-300 border dark:border-none  ${
-                page == currentPage ? "font-bold dark:bg-gray-700" : ""
-              }`}
-            >
-              {page}
-            </button>
-          );
-        })}
-      </div>
-    </>
+    <nav>
+      <ul className="flex gap-2 mt-5">
+        <li>
+          <button
+            onClick={handleFirstClick}
+            className="shadow p-2 rounded-lg dark:bg-gray-700"
+            disabled={currentPage === 1}
+          >
+            {"<<<"}
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={handlePrevClick}
+            className="shadow p-2 rounded-lg dark:bg-gray-700"
+            disabled={currentPage === 1}
+          >
+            {"<"}
+          </button>
+        </li>
+        <li className="p-2 rounded-lg dark:bg-gray-700">
+          Page {currentPage} of {totalPages}
+        </li>
+        <li>
+          <button
+            onClick={handleNextClick}
+            className="shadow p-2 rounded-lg dark:bg-gray-700"
+            disabled={currentPage === totalPages}
+          >
+            {">"}
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={handleLastClick}
+            className="shadow p-2 dark:bg-gray-700 rounded-lg"
+            disabled={currentPage === totalPages}
+          >
+            {">>>"}
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 };
 
