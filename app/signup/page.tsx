@@ -29,6 +29,7 @@ const SignUp = () => {
     } catch (e:any) {
       setError(e.message);
       console.log(e.message);
+      console.log("sup")
     }
   };
 

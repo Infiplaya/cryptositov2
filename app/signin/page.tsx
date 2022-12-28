@@ -25,7 +25,7 @@ const SignIn = () => {
     try {
       await signIn(email, password);
       redirect();
-    } catch (e) {
+    } catch (e:any) {
       setError(e.message);
       console.log(e.message);
     }
