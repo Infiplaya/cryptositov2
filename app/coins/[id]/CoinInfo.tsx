@@ -64,6 +64,8 @@ async function getCoin(id: string) {
   return coinInfo;
 }
 
+
+
 export async function CoinInfo({ id }: { id: string }) {
   const coinInfo = await getCoin(id);
   return (
