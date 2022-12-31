@@ -14,7 +14,9 @@ import { Container } from "./Components/Container";
 config.autoAddCss = false;
 
 // If loading a variable font, you don't need to specify the font weight
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  variable: "--font-inter",
+});
 
 export default function RootLayout({
   children,
@@ -22,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={inter.variable}>
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
@@ -31,9 +33,7 @@ export default function RootLayout({
       <body className="bg-gray-100 dark:bg-gray-800">
         <Providers>
           <Navbar />
-          <Suspense>
-            <Container>{children}</Container>
-          </Suspense>
+          <Container>{children}</Container>
           <Footer />
         </Providers>
       </body>

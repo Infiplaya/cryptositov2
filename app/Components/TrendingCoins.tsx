@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
+import { CryptoData } from "./CoinsContainer";
 
 const TrendingsResult = z.object({
   coins: z.array(
@@ -17,27 +18,12 @@ const TrendingsResult = z.object({
 });
 export type TrendingCoins = z.infer<typeof TrendingsResult>;
 
-async function getTrendingData() {
-  const url = "https://api.coingecko.com/api/v3/search/trending";
-  const res = await fetch(url, { next: { revalidate: 60 * 60 } });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  const trendingCoins: Promise<TrendingCoins> = await res.json();
-
-  return trendingCoins;
-}
-
-export const TrendingCoins = async () => {
-  const trendingCoins = await getTrendingData();
+export const TrendingCoins = ({ trending }: { trending: TrendingCoins }) => {
   return (
     <div className="my-2 md:my-12">
       <h1 className="text-2xl font-bold mb-2">Trending Coins</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {trendingCoins.coins.map((coin) => (
+        {trending.coins.map((coin) => (
           <Link href={`/coins/${coin.item.id}`} key={coin.item.id}>
             <div className="flex justify-between p-4 hover:scale-105 ease-in-out duration-300 shadow-md">
               <div className="flex w-full items-center justify-between">

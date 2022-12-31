@@ -19,22 +19,6 @@ const cryptosResult = z.array(
 );
 export type CryptoData = z.infer<typeof cryptosResult>;
 
-export async function getMarketData() {
-  const url =
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true";
-  const res = await fetch(url, { next: { revalidate: 60 * 60 } });
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  const coins: Promise<CryptoData> = await res.json();
-
-  return coins;
-}
-
-export const CoinsContainer = async () => {
-  const coins = await getMarketData();
-  return <FilterableCoinsTable coins={coins} />;
+export const CoinsContainer = ({ market }: { market: CryptoData }) => {
+  return <FilterableCoinsTable coins={market} />;
 };
